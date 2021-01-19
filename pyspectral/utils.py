@@ -261,6 +261,17 @@ for sub_dir_name in HTTPS_RAYLEIGH_LUTS:
 TB2RAD_DIR = CONF.get('tb2rad_dir', tempfile.gettempdir())
 
 
+REQ_PROXY = {}
+http_proxy = os.getenv("SAT_HTTP_PROXY")
+if http_proxy:
+    REQ_PROXY["http_proxy"] = http_proxy
+https_proxy = os.getenv("SAT_HTTPS_PROXY")
+if https_proxy:
+    REQ_PROXY["https_proxy"] = https_proxy
+if REQ_PROXY:
+    REQ_PROXY = None
+
+
 def convert2wavenumber(rsr):
     """Convert Spectral Responses from wavelength to wavenumber space.
 
@@ -490,7 +501,7 @@ def download_luts(**kwargs):
         if dry_run:
             continue
 
-        response = requests.get(http)
+        response = requests.get(http, proxies=REQ_PROXY)
         total_size = int(response.headers['content-length'])
 
         filename = os.path.join(

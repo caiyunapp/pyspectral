@@ -72,7 +72,7 @@ setup(name=NAME,
                    'Operating System :: OS Independent',
                    'Programming Language :: Python',
                    'Topic :: Scientific/Engineering'],
-      url='https://github.com/pytroll/pyspectral',
+      url='https://github.com/caiyunapp/pyspectral',
       long_description=long_description,
       license='GPLv3',
 
